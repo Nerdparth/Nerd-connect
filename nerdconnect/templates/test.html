@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed</title>
+    <!-- Font Awesome for icons -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Bootstrap for styling and dropdown functionality -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <style>
+        body {
+            margin-top: 20px;
+            background: #eee;
+        }
+
+        /* Social feed */
+        .social-feed-separated .social-feed-box {
+            margin-left: 62px;
+        }
+
+        .social-feed-separated .social-avatar {
+            float: left;
+            padding: 0;
+        }
+
+        .social-feed-separated .social-avatar img {
+            width: 52px;
+            height: 52px;
+            border: 1px solid #e7eaec;
+        }
+
+        .social-feed-separated .social-feed-box .social-avatar {
+            padding: 15px 15px 0 15px;
+            float: none;
+        }
+
+        .social-action {
+            margin: 15px;
+        }
+
+        .social-body p {
+            margin: 15px;
+        }
+    </style>
+
+    <div class="container">
+        <div class="col-md-7">
+            {% for i in posts %}
+            <div class="social-feed-separated">
+                <div class="social-avatar">
+                    <a href="#">
+                        <img alt="image" src="https://bootdey.com/img/Content/avatar/avatar1.png">
+                    </a>
+                </div>
+
+                <div class="social-feed-box">
+                    <div class="pull-right social-action dropdown">
+                        <button data-toggle="dropdown" class="dropdown-toggle btn-white">
+                            <i class="fa fa-angle-down"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action 1</a>
+                            <a class="dropdown-item" href="#">Action 2</a>
+                        </div>
+                    </div>
+                    <div class="social-avatar">
+                        <a href="#">
+                            {{ i.user.username }}
+                        </a>
+                        <!-- Displaying timestamp or any other information -->
+                        <small class="text-muted">{{ i.created_at }}</small>
+                    </div>
+                    <div class="social-body">
+                        <p>
+                            {{ i.post }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Bootstrap and jQuery for dropdowns -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

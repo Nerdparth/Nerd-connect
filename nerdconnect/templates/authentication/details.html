@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nerd's Batch</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <style>
+        .form{
+            margin: 200px;
+            margin-top: 40px;
+            margin-bottom: 0px;
+        }
+
+        button{
+            width: 120px;
+        }
+        h1{
+            margin-left: 60px;
+            margin-top: 60px;
+        }
+        .account-check{
+            display: flex;
+            position: absolute;
+            top: 87%;
+            left: 48.5%;
+            transform: translate(-50%,-50%);
+        }
+        @media screen and (max-width: 500px) { 
+            .form{
+                margin: 30px;
+
+            }
+            h1{
+                margin-left: 30px;
+                margin-top: 80px;
+            
+
+            }
+            .account-check{
+                width: 180px;
+                font-size: 12px;
+                font-weight: bolder;
+            display: flex;
+            position: absolute;
+            top: 94%;
+            left: 48.5%;
+            transform: translate(-50%,-50%);
+        }
+        }
+    </style>
+    <h1>Hold up nerd<br> <p>Don't<b style="color: rgb(255, 0, 0);"> Refresh or Quit</b></p></h1>
+    <form class="form" method="post" action="{% url 'details' %}">
+        {% csrf_token %}
+        <div class="row" style="padding-bottom: 15px;">
+            <div class="col">
+              <input type="text" class="form-control" name="f.name" placeholder="First name">
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" name="l.name" placeholder="Last name">
+            </div>
+          </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Department</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" name="department" aria-describedby="emailHelp">
+        </div>
+        <div class="row" style="padding-bottom: 15px;">
+            <div class="col">
+                <label for="courseSelect" class="form-label">Semester</label>
+                <select class="form-control" id="courseSelect" name="semester">
+                    <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="passed-out">Passed-out</option>
+                </select>
+            </div>
+            <div class="col">
+                <label for="nothing" style="padding-bottom: 9px;">Course</label>
+              <input type="text" id="nothing" class="form-control" name="course" placeholder="">
+            </div>
+          </div> 
+        <div class="row" style="padding-bottom: 15px;">
+            <div class="col">
+                <label for="courseSelect" class="form-label">Relationship</label>
+                <select class="form-control" id="courseSelect" name="relationship">
+                    <option value="Single">Single</option>
+                    <option value="In relationship">In relationship</option>
+                </select>
+            </div>
+            <div class="col">
+                <label for="nothing" style="padding-bottom: 9px;">Tagline</label>
+              <input type="text" id="nothing" class="form-control" name="tagline" placeholder="">
+            </div>
+          </div>        
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">bio</label>
+            <textarea type="text" class="form-control" id="exampleInputEmail1" name="bio" aria-describedby="emailHelp"></textarea>
+          </div>
+        <button style="border-radius: 18px; padding-bottom: 8px; margin-top: 20px;" type="submit" class="btn btn-primary">Let Me In</button>
+      </form>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
