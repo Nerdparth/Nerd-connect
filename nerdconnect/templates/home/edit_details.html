@@ -25,20 +25,63 @@
         .form-container textarea {
             margin-bottom: 15px;
         }
+        .toast {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 250px; 
+    background-color: #fafafa; 
+    color: #fff; 
+    text-align: center; 
+    border-radius: 12px; 
+    padding: 16px; 
+    position: absolute;
+    z-index: 10; 
+    bottom: 10%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    bottom: 30px; 
+    font-size: 17px;
+    opacity: 0; /* Invisible by default */
+    transition: opacity 0.5s ease-in-out, bottom 0.5s ease-in-out;
+}
+.toast-error {
+    /* background-color: #f44336; */
+    color: rgb(60, 0, 0);
+}
+.toast-success {
+    color: rgb(0, 59, 0);
+}
+.toast-info {
+    /* background-color: #2196F3; */
+    color: rgb(0, 0, 49);
+}
+.toast-warning {
+    /* background-color: #ff9800; */
+    color: rgb(118, 87, 0);
+}
+.toast.show {
+    visibility: visible; /* Show the toast */
+    opacity: 1; /* Fully visible */
+    bottom: 50px; /* Move it up a bit */
+}
     </style>
 </head>
 <body>
+    {% if messages %}
+    {% for message in messages %}
+    <div id="toast" class="toast show toast-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
     <div style="padding-left: 40px; padding-top: 30px;">
     <h1 >Nerd <b style="color: rgb(68, 68, 251);"> Connect</b></h1>
     <h3>Edit Your Details</h3></div>
     <!-- Form Container -->
     <div class="form-container">
         
-        <form class="form" method="post" action="{% url 'updatedetails' %}">
+        <form class="form" method="post" action="{% url 'updatedetails' %}" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="row">
                 <div class="col">
-                    <input type="text" class="form-control" name="f.name" placeholder="First name" value="{{ details.fname }}">
+                    <input type="text" class="form-control" name="f.name" placeholder="First name" value="{{ details.fname }}" required>
                 </div>
                 <div class="col">
                     <input type="text" class="form-control" name="l.name" placeholder="Last name" value="{{ details.lname }}">
@@ -46,12 +89,12 @@
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Department</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" name="department" value="{{ details.department }}">
+                <input type="text" class="form-control" id="exampleInputEmail1" name="department" value="{{ details.department }}" required>
             </div>
             <div class="row">
                 <div class="col">
                     <label for="courseSelect" class="form-label">Semester</label>
-                    <select class="form-control" id="courseSelect" name="semester">
+                    <select class="form-control" id="courseSelect" name="semester" required>
                         <option value="1" {% if details.semester == 1 %}selected{% endif %}>1</option>
                         <option value="2" {% if details.semester == 2 %}selected{% endif %}>2</option>
                         <option value="3" {% if details.semester == 3 %}selected{% endif %}>3</option>
@@ -65,13 +108,17 @@
                 </div>
                 <div class="col">
                     <label for="course" class="form-label">Course</label>
-                    <input type="text" id="course" class="form-control" name="course" value="{{ details.course }}">
+                    <input type="text" id="course" class="form-control" name="course" value="{{ details.course }}" required>
                 </div>
             </div> 
+            <div class="mb-3">
+                <label for="formFileMultiple" class="form-label">Upload Profile Picture</label>
+                <input class="form-control" name="image" type="file" id="formFileMultiple" multiple>
+              </div>
             <div class="row">
                 <div class="col">
                     <label for="relationshipSelect" class="form-label">Relationship</label>
-                    <select class="form-control" id="relationshipSelect" name="relationship">
+                    <select class="form-control" id="relationshipSelect" name="relationship" required>
                         <option value="Single" {% if details.relationship == 1 %}selected{% endif %}>Single</option>
                         <option value="In relationship" {% if details.relationship == 2 %}selected{% endif %}>In relationship</option>
                     </select>
@@ -114,6 +161,11 @@
 
     <!-- Import Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        setTimeout(function () {
+                toast.className = toast.className.replace("show", "");
+            }, 3000);
+    </script>
 
 </body>
 </html>

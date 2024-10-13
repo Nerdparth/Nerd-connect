@@ -181,6 +181,44 @@
     .social-feed-box {
         margin-top: 20px;
     }
+    .toast {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 250px; 
+    background-color: #fafafa; 
+    color: #fff; 
+    text-align: center; 
+    border-radius: 12px; 
+    padding: 16px; 
+    position: absolute;
+    z-index: 10; 
+    bottom: 10%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    bottom: 30px; 
+    font-size: 17px;
+    opacity: 0; /* Invisible by default */
+    transition: opacity 0.5s ease-in-out, bottom 0.5s ease-in-out;
+}
+.toast-error {
+    /* background-color: #f44336; */
+    color: rgb(60, 0, 0);
+}
+.toast-success {
+    color: rgb(0, 59, 0);
+}
+.toast-info {
+    /* background-color: #2196F3; */
+    color: rgb(0, 0, 49);
+}
+.toast-warning {
+    /* background-color: #ff9800; */
+    color: rgb(118, 87, 0);
+}
+.toast.show {
+    visibility: visible; /* Show the toast */
+    opacity: 1; /* Fully visible */
+    bottom: 50px; /* Move it up a bit */
+}
 
     @media screen and (min-width: 768px) {
         body {
@@ -201,7 +239,6 @@
         .l-navbar {
             left: 0;
             padding: 1rem 1rem 0 0;
-            bottom: 0;
         }
 
         .show {
@@ -211,37 +248,37 @@
         .body-pd {
             padding-left: calc(var(--nav-width) + 188px);
         }
-
-        h1 {
-            padding-left: 100px;
-            font-size: 2.5rem;
+        .acs-btn{
+            margin-left: 30px;
+            
         }
+        h1 {
+        padding-left: 00px;
+        padding-top: 100px;
+        padding-bottom: 60px;
+        text-align: center;
+        font-size: 2rem;
+    }
+   
     }
 
-    @media screen and (max-width: 767px) {
-        .l-navbar {
-            left: -100%;
-        }
-
-        .show {
-            width: 100%;
-            left: 0;
-        }
-
-        .body-pd {
-            padding-left: 0;
-        }
-
+    @media screen and (max-width: 400px) {
         h1 {
-            padding-left: 0;
-            padding-top: 60px;
-            font-size: 1.5rem;
-            text-align: center;
-        }
+        padding-left: 00px;
+        padding-top: 100px;
+        padding-bottom: 60px;
+        text-align: center;
+        font-size: 2rem;
+    }
     }
 </style>
 
 <body id="body-pd">
+    {% if messages %}
+    {% for message in messages %}
+    <div id="toast" class="toast show toast-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
     <header class="header" id="header">
         <div class="header_toggle"> 
             <i class='bx bx-menu' id="header-toggle"></i> 
@@ -260,7 +297,7 @@
                         <i class='bx bx-user nav_icon'></i> 
                         <span class="nav_name">Your Profile</span> 
                     </a> 
-                    <a href="#" class="nav_link active"> 
+                    <a href="{% url 'search' %}" class="nav_link "> 
                         <i class='bx bx-search-alt-2 nav_icon'></i> 
                         <span class="nav_name">Search Nerds</span> 
                     </a> 
@@ -268,7 +305,7 @@
                         <i class='bx bx-message-square-detail nav_icon'></i> 
                         <span class="nav_name">Create</span> 
                     </a> 
-                    <a href="#" class="nav_link"> 
+                    <a href="{% url 'userposts' %}" class="nav_link"> 
                         <i class='bx bx-bookmark nav_icon'></i> 
                         <span class="nav_name">Your Thoughts</span> 
                     </a> 
@@ -285,28 +322,31 @@
         </nav>
     </div>
 
-    <h1>Nerd<b style="color: rgb(69, 69, 247);">Connect</b> / GNDU Community</h1>
+    <div class="the-heading"><h1 class="the-heading">Nerd<b class="the-heading" style="color: rgb(69, 69, 247);">Connect</b> / GNDU Community</h1></div>
     
     <div class="container">
         <div class="col-md-7">
-            {% for i in posts|dictsortreversed:"created_at" %}
+            {% for item in posts_with_details %}
             <div class="social-feed-separated">
                 <div class="social-avatar">
-                    <a href="#">
-                        <img style="width: 30px;" alt="image" src="https://bootdey.com/img/Content/avatar/avatar1.png">
+                    <a href="{% url 'someuser' item.post.user.username %}">
+                        {% load static %}
+                        <img style="width: 50px;" alt="profile image"
+                             src="{% if item.details.images %}{{ item.details.images.url }}{% else %}{% static 'default.png' %}{% endif %}">
+                        
                     </a>
                 </div>
-
+    
                 <div class="social-feed-box">
                     <div class="social-avatar">
-                        <a href="{}">
-                            {{ i.user.username }}
+                        <a href="{% url 'someuser' item.post.user.username %}">
+                            {{ item.post.user.username }}
                         </a>
-                        <small class="text-muted">{{ i.created_at }}</small>
+                        <small class="text-muted">{{ item.post.created_at }}</small>
                     </div>
                     <div class="social-body">
                         <p>
-                            {{ i.post }}
+                            {{ item.post.post }}
                         </p>
                     </div>
                 </div>
@@ -314,6 +354,7 @@
             {% endfor %}
         </div>
     </div>
+    
 
     <!-- Import Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -348,6 +389,11 @@
             }
             linkColor.forEach(l => l.addEventListener('click', colorLink));
         });
+    </script>
+    <script>
+        setTimeout(function () {
+                toast.className = toast.className.replace("show", "");
+            }, 3000);
     </script>
 </body>
 </html>
