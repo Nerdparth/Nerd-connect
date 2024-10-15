@@ -206,6 +206,138 @@
     opacity: 1; /* Fully visible */
     bottom: 50px; /* Move it up a bit */
 }
+.footer{
+    margin-bottom: 10px;
+    text-align: center;
+   
+}
+.hr{
+    color: grey;
+    opacity: 0.3;
+    width: 1350px;
+    margin-left: 30px;
+}
+.search-result-item {
+    padding-top: 15px;
+    border-radius: 10%;
+    background-color: #fff;
+    border-radius: 4px
+}
+
+.search-result-item:after,
+.search-result-item:before {
+    content: " ";
+    display: table
+}
+
+.search-result-item:after {
+    clear: both
+}
+
+.search-result-item .image-link {
+    display: block;
+    overflow: hidden;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px
+}
+
+@media (min-width:768px) {
+    .search-result-item .image-link {
+        display: inline-block;
+        margin: -20px 0 -20px -20px;
+        float: left;
+        width: 200px
+    }
+}
+
+@media (max-width:767px) {
+    .search-result-item .image-link {
+        max-height: 200px
+
+    }
+}
+
+@media (max-width: 500px) {
+    .search-result-item {
+    display: flex;
+    align-items: flex-start; /* Ensure items align properly */
+    margin: 10px 0; /* Add vertical spacing between items */
+    padding: 10px; /* Add padding for breathing room */
+    border: 1px solid #ddd; /* Optional: add a border for better visibility */
+    border-radius: 5px; /* Optional: rounded corners */
+}
+
+.image-link {
+    margin-right: 10px; /* Spacing between image and text */
+}
+
+img {
+    margin: 10px !important; /* Remove margin to avoid cutting off */
+    width: 60px; /* Set a fixed width for consistency */
+    height: 60px; /* Set a fixed height for consistency */
+    object-fit: cover; /* Ensure the image covers the area without distortion */
+    border-radius: 50%; /* Optional: round the image for a profile effect */
+}
+
+h4 {
+    font-size: 18px; /* Set a consistent font size */
+    margin: 15px; /* Reset margin */
+    word-wrap: break-word; /* Allow wrapping for long usernames */
+    overflow-wrap: break-word; /* Ensure long words break */
+    max-width: 200px; /* Set a max width for the heading */
+}
+
+.info {
+    margin-left: 20px; /* Space between the heading and info */
+    margin-top: 5px; /* Space between the heading and info */
+}
+
+
+}
+
+.search-result-item .image {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin: 25px;
+    margin-left: 55px;
+    margin-top: 18px;
+}
+
+.search-result-item .info {
+    margin-top: 2px;
+    font-size: 12px;
+    color: #999
+}
+
+.search-result-item .description {
+    font-size: 13px
+}
+
+.search-result-item+.search-result-item {
+    margin-top: 20px
+}
+
+@media (min-width:768px) {
+    .search-result-item-body {
+        margin-left: 200px
+    }
+}
+
+.search-result-item-heading {
+    font-weight: 400
+}
+
+.search-result-item-heading>a {
+    color: #555
+}
+
+@media (min-width:768px) {
+    .search-result-item-heading {
+        margin: 0
+    }
+}
     
     
     @media screen and (min-width: 500px) {
@@ -241,6 +373,20 @@
             
         }
    
+    }
+    @media screen and (max-width: 500px){
+        .footer{
+            font-size: 15px;
+            width: 290px;
+            margin-left: 30px;
+        }
+
+        .hr{
+            width: 320px;
+            color: grey;
+            opacity: 0.3;
+            margin-left: 20px;
+        }
     }
    
 </style>
@@ -298,9 +444,7 @@
             <div class="col-md-8">
                 <div class="search">
                     <div class="input-group">
-                        <span class="input-group-text">
-                            <i class="fa fa-search"></i>
-                        </span>
+                        
                         <form method="post" action="{% url 'search' %}" style="width: 800px; display: flex;">
                             {% csrf_token %}
                         <input name="search" type="text" class="form-control" placeholder="Search Your Nerds">
@@ -317,13 +461,35 @@
 {% if users %}
     <ul>
         {% for user in users %}
-            <li>
+            <!-- <li>
                 <a href="{% url 'someuser' user.username %}">{{ user.username }}</a>
-            </li>
+            </li> -->
+            {% load static %}
+            <section class="search-result-item">
+                <a class="image-link" href="#"><img class="image" src="{{ user.images }}" alt="User Image"></a>
+                <div class="search-result-item-body">
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <h4 class="search-result-item-heading"><a href="#">{{ user.username }}</a></h4>
+            
+                            <!-- Access bio directly from user object -->
+                            <p class="info">{{ user.bio }}</p>
+            
+                        </div>
+                    </div>
+                </div>
+            </section>
+                                
         {% endfor %}
     </ul>
+    <hr class="hr">
+    <footer class="footer">A <a href="https://www.linkedin.com/in/parth-kapoor-151436269/">Parth Kapoor</a> production <br> NerdConnect &#169; 2024 All Rights Reserved</footer>
+ 
 {% else %}
     <p>No users found matching your search.</p>
+    <hr class="hr">
+    <footer class="footer">A <a href="https://www.linkedin.com/in/parth-kapoor-151436269/">Parth Kapoor</a> production <br> NerdConnect &#169; 2024 All Rights Reserved</footer>
+ 
 {% endif %}
 
 

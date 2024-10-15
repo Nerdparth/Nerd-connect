@@ -16,6 +16,32 @@
 </head>
 
 <style>
+    /* For Webkit-based browsers (Chrome, Safari, etc.) */
+::-webkit-scrollbar {
+    width: 12px;               /* Set scrollbar width */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;       /* Background of the scrollbar track */
+    border-radius: 10px;       /* Rounded edges for the track */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #888;    /* Scrollbar color */
+    border-radius: 10px;       /* Rounded edges for the thumb */
+    border: 3px solid #f1f1f1; /* Add padding around the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555;    /* Darker color on hover */
+}
+
+/* For Firefox */
+* {
+    scrollbar-width: thin;     /* Thin scrollbar */
+    scrollbar-color:#2369ff #f1f1f1; /* Scrollbar and track colors */
+}
+
     :root {
         --header-height: 3rem;
         --nav-width: 68px;
@@ -219,6 +245,16 @@
     opacity: 1; /* Fully visible */
     bottom: 50px; /* Move it up a bit */
 }
+.footer{
+    margin-top: 0px;
+    text-align: center;
+    padding-left: 280px;
+}
+.hr{
+    color: grey;
+    opacity: 0.3;
+    width: 1200px;
+}
 
     @media screen and (min-width: 768px) {
         body {
@@ -254,23 +290,44 @@
         }
         h1 {
         padding-left: 00px;
-        padding-top: 100px;
+        
         padding-bottom: 60px;
         text-align: center;
         font-size: 2rem;
     }
    
     }
+    @media screen and (max-width: 500px){
+        .footer{
+            font-size: 13px;
+            width: 290px;
+            padding-left: 30px;
+        }
 
-    @media screen and (max-width: 400px) {
-        h1 {
+        .hr{
+            width: 290px;
+            color: grey;
+            opacity: 0.3;
+        }
+        .the-heading {
         padding-left: 00px;
-        padding-top: 100px;
+        
         padding-bottom: 60px;
         text-align: center;
         font-size: 2rem;
     }
     }
+
+    @media screen and (max-width: 400px) {
+        .the-heading {
+        padding-left: 00px;
+        
+        padding-bottom: 60px;
+        text-align: center;
+        font-size: 2rem;
+    }
+    }
+    
 </style>
 
 <body id="body-pd">
@@ -352,10 +409,13 @@
                 </div>
             </div>
             {% endfor %}
+            <hr class="hr">
+            <footer class="footer">A <a href="https://www.linkedin.com/in/parth-kapoor-151436269/">Parth Kapoor</a> production <br> NerdConnect &#169; 2024 All Rights Reserved</footer>
         </div>
     </div>
     
-
+    
+ 
     <!-- Import Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

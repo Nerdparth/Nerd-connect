@@ -15,16 +15,52 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Details',
+            name="Details",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('fname', models.CharField(default="i don't remember", max_length=60)),
-                ('lname', models.CharField(default="i don't remember", max_length=60)),
-                ('department', models.CharField(default='-', max_length=60)),
-                ('course', models.CharField(default='NON-USEFUL', max_length=60)),
-                ('semester', models.CharField(choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'), ('7', '7'), ('8', '8'), ('graduated', 'graduated')], default='1', max_length=60)),
-                ('bio', models.CharField(default='Oops i just forgot to add my Bio', max_length=60)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("fname", models.CharField(default="i don't remember", max_length=60)),
+                ("lname", models.CharField(default="i don't remember", max_length=60)),
+                ("department", models.CharField(default="-", max_length=60)),
+                ("course", models.CharField(default="NON-USEFUL", max_length=60)),
+                (
+                    "semester",
+                    models.CharField(
+                        choices=[
+                            ("1", "1"),
+                            ("2", "2"),
+                            ("3", "3"),
+                            ("4", "4"),
+                            ("5", "5"),
+                            ("6", "6"),
+                            ("7", "7"),
+                            ("8", "8"),
+                            ("graduated", "graduated"),
+                        ],
+                        default="1",
+                        max_length=60,
+                    ),
+                ),
+                (
+                    "bio",
+                    models.CharField(
+                        default="Oops i just forgot to add my Bio", max_length=60
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

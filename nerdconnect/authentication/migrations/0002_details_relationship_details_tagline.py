@@ -6,18 +6,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('authentication', '0001_initial'),
+        ("authentication", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='details',
-            name='relationship',
-            field=models.CharField(choices=[('Single', 'Single'), ('In relationship', 'In relationship')], default='Single', max_length=30),
+            model_name="details",
+            name="relationship",
+            field=models.CharField(
+                choices=[("Single", "Single"), ("In relationship", "In relationship")],
+                default="Single",
+                max_length=30,
+            ),
         ),
         migrations.AddField(
-            model_name='details',
-            name='tagline',
-            field=models.CharField(default='GNDU student', max_length=300),
+            model_name="details",
+            name="tagline",
+            field=models.CharField(default="GNDU student", max_length=300),
         ),
     ]

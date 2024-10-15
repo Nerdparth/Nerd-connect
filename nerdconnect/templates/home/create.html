@@ -16,6 +16,10 @@
 </head>
 
 <style>
+    html, body {
+    overflow: hidden;  
+    height: 100%;      
+}
     :root {
         --header-height: 3rem;
         --nav-width: 68px;
@@ -206,6 +210,20 @@
     opacity: 1; /* Fully visible */
     bottom: 50px; /* Move it up a bit */
 }
+.footer{
+    margin-top: 0px;
+    position: absolute;
+    left: 50%;
+    bottom: 0px;
+    transform: translate(-50%);
+    text-align: center;
+   
+}
+.hr{
+    color: grey;
+    opacity: 0.3;
+    width: 1200px;
+}
     @media screen and (min-width: 768px) {
         body {
             margin: calc(var(--header-height) + 1rem) 0 0 0;
@@ -233,6 +251,19 @@
 
         .body-pd {
             padding-left: calc(var(--nav-width) + 188px);
+        }
+    }
+
+    @media screen and (max-width: 500px){
+        .footer{
+            font-size: 15px;
+            width: 290px;
+        }
+
+        .hr{
+            width: 290px;
+            color: grey;
+            opacity: 0.3;
         }
     }
     body {
@@ -339,6 +370,7 @@ button.btn-primary {
             </div>
         </div>
             </div>
+            <footer class="footer"><hr class="hr">A <a href="https://www.linkedin.com/in/parth-kapoor-151436269/">Parth Kapoor</a> production <br> NerdConnect &#169; 2024 All Rights Reserved</footer>
 
     <!-- Import Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>

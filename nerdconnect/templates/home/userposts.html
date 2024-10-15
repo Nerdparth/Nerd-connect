@@ -219,7 +219,16 @@
     opacity: 1; /* Fully visible */
     bottom: 50px; /* Move it up a bit */
 }
-
+.footer{
+    margin-top: 0px;
+    text-align: center;
+   
+}
+.hr{
+    color: grey;
+    opacity: 0.3;
+    width: 1400px;
+}
     @media screen and (min-width: 768px) {
         body {
             margin: calc(var(--header-height) + 1rem) 0 0 0;
@@ -260,6 +269,18 @@
         font-size: 2rem;
     }
    
+    }
+    @media screen and (max-width: 500px){
+        .footer{
+            font-size: 15px;
+            width: 290px;
+        }
+
+        .hr{
+            width: 290px;
+            color: grey;
+            opacity: 0.3;
+        }
     }
 
     @media screen and (max-width: 400px) {
@@ -323,16 +344,15 @@
     </div>
 
     <div class="the-heading"><h1 class="the-heading">Nerd<b class="the-heading" style="color: rgb(69, 69, 247);">Connect</b> / Your Posts</h1></div>
-    
+    {% load static %}
     <div class="container">
         <div class="col-md-7">
             {% for item in post %}
             <div class="social-feed-separated">
                 <div class="social-avatar">
                     <a href="{% url 'home' user %}">
-                        {% load static %}
                         <img style="width: 50px;" alt="profile image"
-                             src="{% if item.details.images %}{{ item.details.images.url }}{% else %}{% static 'default.png' %}{% endif %}">
+                             src="{% if images %}{{ images.url }}{% else %}{% static 'default.png' %}{% endif %}">
                         
                     </a>
                 </div>
@@ -355,7 +375,7 @@
         </div>
     </div>
     
-
+    <footer class="footer"><hr class="hr">A <a href="https://www.linkedin.com/in/parth-kapoor-151436269/">Parth Kapoor</a> production <br> NerdConnect &#169; 2024 All Rights Reserved</footer>
     <!-- Import Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

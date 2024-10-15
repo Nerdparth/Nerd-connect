@@ -6,13 +6,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('authentication', '0003_details_facebook_details_github_details_instagram_and_more'),
+        (
+            "authentication",
+            "0003_details_facebook_details_github_details_instagram_and_more",
+        ),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='details',
-            name='lname',
-            field=models.CharField(default=' ', max_length=60),
+            model_name="details",
+            name="lname",
+            field=models.CharField(default=" ", max_length=60),
         ),
     ]
